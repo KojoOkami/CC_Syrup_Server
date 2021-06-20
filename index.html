@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turtle Server</title>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8081")
+    function moveTurtleForward() {
+      ws.send("return turtle.forward()")
+      console.log("return turtle.forward()")
+    }
+    function closeConnection() {
+      ws.send("close")
+      console.log("close")
+    }
+    ws.addEventListener("message",msg=>{
+      if (JSON.parse(msg.data).id === "control") {
+        console.log(msg.data)
+      }
+    })
+  </script>
+</head>
+<body>
+  <button style="font-size: 50px;" onclick="moveTurtleForward()">Forward</button>
+  <button style="font-size: 50px;" onclick="closeConnection()">Close</button>
+</body>
+</html>
