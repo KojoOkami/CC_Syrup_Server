@@ -76,4 +76,4 @@ typings/
 .fusebox/
 
 # Secrets
-config.mjs
+config.js
